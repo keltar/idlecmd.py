@@ -4,6 +4,7 @@ import psutil;
 import re;
 import argparse;
 import os;
+import sys;
 
 num_hits_cpu = 0;
 num_hits_net = 0;
@@ -81,7 +82,7 @@ def step():
 	if step_hit:
 		hits += 1;
 	else:
-		if hits > 0:
+		if hits > 0 and verbose:
 			print("resetting sample count (was %d)" % hits);
 		hits = 0;
 
@@ -125,6 +126,6 @@ try:
 
 			if command != None and len(command) > 0:
 				os.system(command);
-			os.exit(exit_code);
+			sys.exit(exit_code);
 except KeyboardInterrupt:
 	print("interrupt received, stopping");
